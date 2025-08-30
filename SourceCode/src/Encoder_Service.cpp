@@ -16,7 +16,7 @@ void encoder_tick()  // Interrupt Service Routine for the encoder
 
 void encoder_init()
 {
-    encoder = new RotaryEncoder(Encoder_A, Encoder_B, RotaryEncoder::LatchMode::TWO03);
+    encoder = new RotaryEncoder(Encoder_A, Encoder_B, RotaryEncoder::LatchMode::FOUR3);
     attachInterrupt(digitalPinToInterrupt(Encoder_A), encoder_tick, CHANGE); // Attach interrupt to Encoder_A
     attachInterrupt(digitalPinToInterrupt(Encoder_B), encoder_tick, CHANGE); // Attach interrupt to Encoder_B
     pinMode(Encoder_BTN, INPUT); // Pin for Encoder_BTN

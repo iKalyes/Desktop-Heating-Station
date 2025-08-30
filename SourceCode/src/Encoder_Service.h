@@ -7,9 +7,9 @@
 #include "ui/ui.h"
 #include <GPIO_Service.h>  // 确保包含蜂鸣器控制函数
 
-#define Encoder_A 14
-#define Encoder_B 15
-#define Encoder_BTN 11
+#define Encoder_A 17
+#define Encoder_B 16
+#define Encoder_BTN 15
 
 void encoder_tick();  // Interrupt Service Routine for the encoder
 void encoder_init();

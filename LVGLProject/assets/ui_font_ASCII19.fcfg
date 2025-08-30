@@ -10,7 +10,7 @@
   "ranges": [
     "0x20-0x7f"
   ],
-  "symbols": "电烙铁热风枪加台保存设置系统初始化中恒温模式曲线自定显示屏成功偶状态正常错误编码器在载主屏幕完",
+  "symbols": "电烙铁热风枪加台保存设置系统初始化中恒温模式曲线自定显示屏成功偶状态正常错误编码器在载主屏幕完控件组",
   "customparams": "--no-compress --no-prefilter",
   "uploaded": false
 }

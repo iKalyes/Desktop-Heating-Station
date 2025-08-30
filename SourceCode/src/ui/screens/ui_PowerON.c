@@ -64,7 +64,7 @@ void ui_PowerON_screen_init(void)
     lv_obj_set_y(ui_InitializeStatus, 63);
     lv_obj_set_align(ui_InitializeStatus, LV_ALIGN_CENTER);
     lv_textarea_set_placeholder_text(ui_InitializeStatus, "系统初始化中...");
-    lv_obj_clear_flag(ui_InitializeStatus, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_CLICK_FOCUSABLE);      /// Flags
+    lv_obj_clear_flag(ui_InitializeStatus, LV_OBJ_FLAG_CLICK_FOCUSABLE);      /// Flags
     ui_object_set_themeable_style_property(ui_InitializeStatus, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR,
                                            _ui_theme_color_TextAndImage);
     ui_object_set_themeable_style_property(ui_InitializeStatus, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA,

@@ -7,9 +7,9 @@
 
 void WriteFlash();
 void WriteHeater();
+void WriteDisplayType();
 void WritePID();
 void ReadFlash();
-void ReadPID();
 void ClearFlash();
 
 #endif

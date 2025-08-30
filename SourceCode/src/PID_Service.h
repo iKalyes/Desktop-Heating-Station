@@ -56,8 +56,15 @@ static inline float RTS_Curve(unsigned long elapsed_ms)
     return _interp1(t, ts, ys, sizeof(ts)/sizeof(ts[0]));
 }
 
-// 自定曲线模式占位：后续可在此实现用户自定曲线
-// static inline float CUSTOM_Curve(unsigned long elapsed_ms) { /* TODO */ }
+// 自定曲线模式
+static inline float CUSTOM_Curve(unsigned long elapsed_ms)
+{
+    const float t = elapsed_ms / 1000.0f; // s
+    // 时间点(s)与目标温度(℃)
+    static const float ts[]  = {   0, (float)Time1, (float)Time2, (float)Time3, (float)Time4, (float)Time5, 9999};
+    static const float ys[]  = {  50, (float)Temp1, (float)Temp2, (float)Temp3, (float)Temp4, (float)Temp5,   50};
+    return _interp1(t, ts, ys, sizeof(ts)/sizeof(ts[0]));
+}
 
 void Heater_PID_Compute_Init();
 void Heater_PID_Update_Tunings(float Kp, float Ki, float Kd);

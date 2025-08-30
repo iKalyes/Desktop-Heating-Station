@@ -7,5 +7,6 @@
 #include <variables.h>
 #include <display.h>
 #include <flash.h>
+#include <event_user.h>
 
 #endif // _EVENT_SETTING_H

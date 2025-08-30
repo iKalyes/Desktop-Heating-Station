@@ -32,5 +32,6 @@
         "mutex": "cpp",
         "coremutex.h": "c",
         "event_queue.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "E:/Desktop-Heating-Station/SourceCode/src/ui"
 }

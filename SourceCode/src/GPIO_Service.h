@@ -5,9 +5,9 @@
 #include <variables.h>
 #include <hardware/pwm.h>
 
-#define Heater_PWM 16
+#define Heater_PWM 14
 #define Cooling_FAN_PWM 20
-#define Buzzer_PWM 12
+#define Buzzer_PWM 18
 
 void Heater_GPIO_Init();
 void Heater_Set_PWM(float value);

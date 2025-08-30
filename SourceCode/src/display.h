@@ -10,6 +10,7 @@
 #include <event_pid.h>
 #include <variables.h>
 #include <GPIO_Service.h>
+#include <event_user.h>
 
 #define Screen_BKLT 6
 
@@ -29,5 +30,7 @@ void lvgl_task_handler();
 void MainScreen_init();
 void SystemSettingScreen_init();
 void PIDSettingScreen_init();
+void UserSettingScreen_init();
+void ChangeDisplayType(bool Type);
 
 #endif

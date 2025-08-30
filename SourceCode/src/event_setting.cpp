@@ -18,6 +18,17 @@ if ( event_code == LV_EVENT_RELEASED) {
 }
 }
 
+void ui_event_ReflowSetting(lv_event_t *e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if (event_code == LV_EVENT_RELEASED)
+    {
+        _ui_screen_change(&ui_UserSettingScreen, LV_SCR_LOAD_ANIM_FADE_ON, 100, 0, &ui_UserSettingScreen_screen_init);
+        lvgl_group_to_user();
+    }
+}
+
 void ui_event_HeaterMaxTemp(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
@@ -25,6 +36,7 @@ void ui_event_HeaterMaxTemp(lv_event_t *e)
 if ( event_code == LV_EVENT_VALUE_CHANGED) {
     _ui_slider_set_text_value(ui_TextHeaterMaxTemp, target, "", "℃");
     HeaterTargetTempMax = lv_slider_get_value(target);
+    user_temp_sliders_refresh_max(); // 新增：调用以重设Temp滑块最大值
 }
 }
 
@@ -35,6 +47,14 @@ void ui_event_HeatingTime(lv_event_t *e)
 if ( event_code == LV_EVENT_VALUE_CHANGED) {
     _ui_slider_set_text_value(ui_TextHeatingTime, target, "", "Min");
     HeaterHeatingTime = lv_slider_get_value(target);
+    if (HeaterHeatingTime == 0)
+    {
+        lv_img_set_src(ui_SleepStatus, &ui_img_minus_png);
+    }
+    else
+    {
+        lv_img_set_src(ui_SleepStatus, &ui_img_295618317);
+    }
 }
 }
 

@@ -10,7 +10,7 @@
   "ranges": [
     "0x20-0x7f"
   ],
-  "symbols": "保存设置曲线自定",
+  "symbols": "保存设置曲线自定屏幕请选择类型",
   "customparams": "--no-compress --no-prefilter",
   "uploaded": false
 }

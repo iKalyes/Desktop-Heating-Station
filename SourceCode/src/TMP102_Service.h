@@ -8,8 +8,8 @@
 #include <GPIO_Service.h>
 #include <variables.h>
 
-#define TMP102_SCL 19
-#define TMP102_SDA 18
+#define TMP102_SCL 23
+#define TMP102_SDA 22
 
 bool TMP102_Init();
 void TMP102_Task(lv_timer_t *timer);

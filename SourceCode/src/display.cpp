@@ -137,14 +137,23 @@ void display_init()
   MainScreen_init();
   SystemSettingScreen_init();
   PIDSettingScreen_init();
-
   Heater_PID_Init();
+  UserSettingScreen_init();
 }
 
 void lvgl_task_handler()
 {
   lv_task_handler();
   handle_encoder_parameters_edit();
+}
+
+void ChangeDisplayType(bool Type)
+{
+  if (Type) {
+      tft.invertDisplay(true); // true:IPS屏幕
+  } else {
+      tft.invertDisplay(false); // false:TFT屏幕
+  }
 }
 
 void MainScreen_init()
@@ -171,6 +180,8 @@ void MainScreen_init()
   if (HeaterHeatingTime == 0)
   {
     lv_img_set_src(ui_SleepStatus, &ui_img_minus_png);
+  } else {
+    lv_img_set_src(ui_SleepStatus, &ui_img_295618317);
   }
 }
 
@@ -187,7 +198,7 @@ void SystemSettingScreen_init()
     lv_label_set_text_fmt(ui_TextHeaterMaxTemp, "%d℃", HeaterTargetTempMax);
     lv_slider_set_value(ui_HeaterMaxTemp, HeaterTargetTempMax, LV_ANIM_OFF);
 
-    lv_label_set_text_fmt(ui_TextHeatingTime, "%d℃", HeaterHeatingTime);
+    lv_label_set_text_fmt(ui_TextHeatingTime, "%dMin", HeaterHeatingTime);
     lv_slider_set_value(ui_HeatingTime, HeaterHeatingTime, LV_ANIM_OFF);
 
     lv_label_set_text_fmt(ui_TextBrightness, "%d%%", Brightness);
@@ -200,4 +211,39 @@ void PIDSettingScreen_init()
     lv_obj_add_flag(ui_HeaterKP, LV_OBJ_FLAG_SCROLL_ON_FOCUS);
     lv_obj_add_flag(ui_HeaterKI, LV_OBJ_FLAG_SCROLL_ON_FOCUS);
     lv_obj_add_flag(ui_HeaterKD, LV_OBJ_FLAG_SCROLL_ON_FOCUS);
+}
+
+void UserSettingScreen_init()
+{
+    lv_label_set_text_fmt(ui_TextTemp1, "%d℃", Temp1);
+    lv_slider_set_value(ui_Temp1, Temp1, LV_ANIM_OFF);
+
+    lv_label_set_text_fmt(ui_TextTemp2, "%d℃", Temp2);
+    lv_slider_set_value(ui_Temp2, Temp2, LV_ANIM_OFF);
+
+    lv_label_set_text_fmt(ui_TextTemp3, "%d℃", Temp3);
+    lv_slider_set_value(ui_Temp3, Temp3, LV_ANIM_OFF);
+
+    lv_label_set_text_fmt(ui_TextTemp4, "%d℃", Temp4);
+    lv_slider_set_value(ui_Temp4, Temp4, LV_ANIM_OFF);
+
+    lv_label_set_text_fmt(ui_TextTemp5, "%d℃", Temp5);
+    lv_slider_set_value(ui_Temp5, Temp5, LV_ANIM_OFF);
+
+    lv_label_set_text_fmt(ui_TextTime1, "%dS", Time1);
+    lv_slider_set_value(ui_Time1, Time1, LV_ANIM_OFF);
+
+    lv_label_set_text_fmt(ui_TextTime2, "%dS", Time2);
+    lv_slider_set_value(ui_Time2, Time2, LV_ANIM_OFF);
+
+    lv_label_set_text_fmt(ui_TextTime3, "%dS", Time3);
+    lv_slider_set_value(ui_Time3, Time3, LV_ANIM_OFF);
+
+    lv_label_set_text_fmt(ui_TextTime4, "%dS", Time4);
+    lv_slider_set_value(ui_Time4, Time4, LV_ANIM_OFF);
+
+    lv_label_set_text_fmt(ui_TextTime5, "%dS", Time5);
+    lv_slider_set_value(ui_Time5, Time5, LV_ANIM_OFF);
+
+    user_chart_init();
 }

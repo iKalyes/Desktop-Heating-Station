@@ -1,8 +1,11 @@
 #include <variables.h> 
 
-String Version = "Ver: 1.0 - 250829 Release"; // 固件版本号
+String Version = "Ver: 1.0 - 250831 Release"; // 固件版本号
 
 bool Heater_Enabled = false;
+
+bool Display_Type = true; // true: IPS屏幕；false: TFT屏幕
+bool Display_Type_Configured = false; // 是否已配置显示类型
 
 uint16_t HeaterTargetTemp = 100;
 uint16_t HeaterTargetTempMax = 200; //Max 350
@@ -25,3 +28,15 @@ float Heater_DutyCycle;
 float Heater_KP = 70.0f;
 float Heater_KI = 0.6f;
 float Heater_KD = 25.0f;
+
+uint16_t Temp1 = 200;
+uint16_t Temp2 = 200;
+uint16_t Temp3 = 200;
+uint16_t Temp4 = 200;
+uint16_t Temp5 = 200;
+
+uint16_t Time1 = 180;
+uint16_t Time2 = 180;
+uint16_t Time3 = 180;
+uint16_t Time4 = 180;
+uint16_t Time5 = 180;

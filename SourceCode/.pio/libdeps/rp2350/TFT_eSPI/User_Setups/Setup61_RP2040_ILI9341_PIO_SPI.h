@@ -13,7 +13,7 @@
 // TFT driver
 #define ILI9342_DRIVER
 #define TFT_RGB_ORDER TFT_BGR
-#define TFT_INVERSION_ON
+#define TFT_INVERSION_OFF //TFT屏幕:OFF；IPS屏幕：ON
 
 // Pins - the PIO will control MOSI, SCLK and DC pins
 // Any digital GPIO pins may be used
@@ -42,4 +42,3 @@
 #define SMOOTH_FONT
 
 #define SPI_FREQUENCY  100000000
-#define SPI_READ_FREQUENCY  10000000

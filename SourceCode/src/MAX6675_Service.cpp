@@ -4,6 +4,12 @@ MAX6675 sensorheater(MAX6675_SO_PIN, MAX6675_CS_PIN, MAX6675_CLK_PIN, &SPI1, 100
 lv_timer_t* MAX6675_Display_Timer;
 static lv_chart_series_t * temp_series = NULL;
 
+// 新增：主屏对象与工具函数（仅当主屏激活时才刷新图表）
+extern lv_obj_t *ui_MainScreen;
+static inline bool is_main_screen_active() {
+    return lv_scr_act() == ui_MainScreen;
+}
+
 uint16_t Clock_Seconds = 0;
 
 void MAX6675_Init()
@@ -35,14 +41,14 @@ void MAX6675_Task(lv_timer_t *timer)
         lv_label_set_text_fmt(ui_Second, "%05dS", Clock_Seconds);
         lv_bar_set_value(ui_BarHeaterDuty, Heater_DutyCycle, LV_ANIM_ON);
 
-        // 更新图表数据
-        if (temp_series) {
+        // 更新图表数据（仅当主屏激活时才执行）
+        if (temp_series && is_main_screen_active()) {
             if (!Heater_Enabled) {
                 // 重置加热状态
                 if (heating_started) {
                     heating_started = false;
                     temp_point_count = 0;
-                    lv_chart_set_point_count(ui_HeaterChart, 256);
+                    lv_chart_set_point_count(ui_HeaterChart, 128);
                 }
                 
                 // 未启用：动态范围调整，最小值固定为0，最大值可双向调整
@@ -131,8 +137,8 @@ void MAX6675_Task(lv_timer_t *timer)
         lv_label_set_text(ui_Second, "00000S");
         lv_bar_set_value(ui_BarHeaterDuty, 0, LV_ANIM_ON);
         
-        // 完全清空图表显示内容
-        if (temp_series) {
+        // 完全清空图表显示内容（仅当主屏激活时才执行）
+        if (temp_series && is_main_screen_active()) {
             lv_chart_set_point_count(ui_HeaterChart, 0);
             lv_chart_remove_series(ui_HeaterChart, temp_series);
             

@@ -13,6 +13,7 @@
 #include <Encoder_Service.h>
 #include <GPIO_Service.h>
 #include <PID_Service.h>
+#include <flash.h>
 
 #include <variables.h>
 

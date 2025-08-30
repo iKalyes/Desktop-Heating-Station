@@ -22,6 +22,7 @@ extern lv_obj_t * ui_SystemSetting;
 extern void ui_event_PIDSetting(lv_event_t * e);
 extern lv_obj_t * ui_PIDSetting;
 extern lv_obj_t * ui_TextPIDSetting;
+extern void ui_event_ReflowSetting(lv_event_t * e);
 extern lv_obj_t * ui_ReflowSetting;
 extern lv_obj_t * ui_TextReflowSetting;
 extern void ui_event_HeaterMaxTemp(lv_event_t * e);

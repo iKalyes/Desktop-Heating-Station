@@ -5,6 +5,9 @@
 
 extern String Version;
 
+extern bool Display_Type;
+extern bool Display_Type_Configured;
+
 extern bool Heater_Enabled;
 
 extern uint16_t HeaterTargetTemp;
@@ -28,5 +31,17 @@ extern float Heater_DutyCycle;
 extern float Heater_KP;
 extern float Heater_KI;
 extern float Heater_KD;
+
+extern uint16_t Temp1;
+extern uint16_t Temp2;
+extern uint16_t Temp3;
+extern uint16_t Temp4;
+extern uint16_t Temp5;
+
+extern uint16_t Time1;
+extern uint16_t Time2;
+extern uint16_t Time3;
+extern uint16_t Time4;
+extern uint16_t Time5;
 
 #endif

@@ -34,6 +34,7 @@ extern "C" {
 #include "screens/ui_HeaterTempSetScreen.h"
 #include "screens/ui_SystemSettingScreen.h"
 #include "screens/ui_PIDSettingScreen.h"
+#include "screens/ui_UserSettingScreen.h"
 
 ///////////////////// VARIABLES ////////////////////
 
@@ -47,10 +48,10 @@ extern lv_obj_t * ui____initial_actions0;
 // IMAGES AND IMAGE SETS
 LV_IMG_DECLARE(ui_img_739362403);    // assets/开机头图.png
 LV_IMG_DECLARE(ui_img_1671917170);    // assets/material-symbols_settings-rounded.png
-LV_IMG_DECLARE(ui_img_185202102);    // assets/material-symbols_volume-off-outline-rounded.png
 LV_IMG_DECLARE(ui_img_1699618864);    // assets/material-symbols_volume-up-outline-rounded.png
-LV_IMG_DECLARE(ui_img_1708415670);    // assets/material-symbols_mode-fan-off-outline-sharp.png
+LV_IMG_DECLARE(ui_img_185202102);    // assets/material-symbols_volume-off-outline-rounded.png
 LV_IMG_DECLARE(ui_img_2103744591);    // assets/material-symbols_mode-fan-outline.png
+LV_IMG_DECLARE(ui_img_1708415670);    // assets/material-symbols_mode-fan-off-outline-sharp.png
 LV_IMG_DECLARE(ui_img_740489818);    // assets/material-symbols_thermostat-rounded.png
 LV_IMG_DECLARE(ui_img_1249241237);    // assets/icon-park-solid_sleep.png
 LV_IMG_DECLARE(ui_img_1357884022);    // assets/material-symbols_looks-one-rounded.png

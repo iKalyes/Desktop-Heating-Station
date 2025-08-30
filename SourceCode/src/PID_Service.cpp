@@ -91,9 +91,9 @@ static inline float GetModeTargetTemp(unsigned long now_ms)
             const unsigned long elapsed = (heating_start_ms == 0) ? 0UL : (now_ms - heating_start_ms);
             return RTS_Curve(elapsed);
         }
-        case 3: { // 自定曲线（暂未启用，预留放置区域）
-            // TODO: 自定曲线模式实现入口（当前回退到恒温目标）
-            return (float)HeaterTargetTemp;
+        case 3: { // 自定曲线
+            const unsigned long elapsed = (heating_start_ms == 0) ? 0UL : (now_ms - heating_start_ms);
+            return CUSTOM_Curve(elapsed);
         }
         case 0:
         default:
@@ -146,8 +146,8 @@ void Heater_PID_Compute()
             }
         }
 
-        // 新增：到时自动停止加热（HeaterHeatingTime 单位：分钟；0 表示不自动停止）
-        if (HeaterHeatingTime > 0 && Timer_Minutes >= HeaterHeatingTime) {
+        // 新增：到时自动停止加热（仅恒温模式生效；HeaterHeatingTime 单位：分钟；0 表示不自动停止）
+        if (Heating_Mode == 0 && HeaterHeatingTime > 0 && Timer_Minutes >= HeaterHeatingTime) {
             // 立即停PWM与占空比
             Heater_DutyCycle = 0.0f;
             Heater_Set_PWM(0);

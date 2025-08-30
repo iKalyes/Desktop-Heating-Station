@@ -154,7 +154,7 @@ void ui_SystemSettingScreen_screen_init(void)
     lv_obj_set_x(ui_TextReflowSetting, -6);
     lv_obj_set_y(ui_TextReflowSetting, 0);
     lv_obj_set_align(ui_TextReflowSetting, LV_ALIGN_LEFT_MID);
-    lv_label_set_text(ui_TextReflowSetting, "加热台 - 回流参数设置");
+    lv_label_set_text(ui_TextReflowSetting, "加热台 - 自定曲线设置");
     ui_object_set_themeable_style_property(ui_TextReflowSetting, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR,
                                            _ui_theme_color_TextAndImage);
     ui_object_set_themeable_style_property(ui_TextReflowSetting, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA,
@@ -333,6 +333,7 @@ void ui_SystemSettingScreen_screen_init(void)
 
     lv_obj_add_event_cb(ui_SystemSettingBack, ui_event_SystemSettingBack, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_PIDSetting, ui_event_PIDSetting, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ReflowSetting, ui_event_ReflowSetting, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_HeaterMaxTemp, ui_event_HeaterMaxTemp, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_HeatingTime, ui_event_HeatingTime, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SystemBrightness, ui_event_SystemBrightness, LV_EVENT_ALL, NULL);

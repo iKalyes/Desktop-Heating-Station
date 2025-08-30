@@ -7,6 +7,7 @@
 
 void lvgl_group_init();
 void lvgl_group_to_setting();
+void lvgl_group_to_user();
 void lvgl_group_to_main();
 void lvgl_group_to_heater();
 void lvgl_group_to_pid_setting();

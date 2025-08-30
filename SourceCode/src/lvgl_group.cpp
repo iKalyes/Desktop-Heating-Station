@@ -65,6 +65,29 @@ void lvgl_group_to_heater()
     lv_indev_wait_release(get_encoder_indev());
     
     lv_group_add_obj(group, ui_HeaterTempSetBack);
+    lv_group_add_obj(group, ui_RSS);
+    lv_group_add_obj(group, ui_RTS);
+    lv_group_add_obj(group, ui_USER);
+}
+
+void lvgl_group_to_user()
+{
+    lv_group_remove_all_objs(group);
+
+    // 等待输入设备释放后再添加对象到组
+    lv_indev_wait_release(get_encoder_indev());
+
+    lv_group_add_obj(group, ui_UserSettingBack);
+    lv_group_add_obj(group, ui_Temp1);
+    lv_group_add_obj(group, ui_Time1);
+    lv_group_add_obj(group, ui_Temp2);
+    lv_group_add_obj(group, ui_Time2);
+    lv_group_add_obj(group, ui_Temp3);
+    lv_group_add_obj(group, ui_Time3);
+    lv_group_add_obj(group, ui_Temp4);
+    lv_group_add_obj(group, ui_Time4);
+    lv_group_add_obj(group, ui_Temp5);
+    lv_group_add_obj(group, ui_Time5);
 }
 
 void lvgl_group_to_main()

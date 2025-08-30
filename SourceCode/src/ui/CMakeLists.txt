@@ -3,6 +3,7 @@ SET(SOURCES screens/ui_PowerON.c
     screens/ui_HeaterTempSetScreen.c
     screens/ui_SystemSettingScreen.c
     screens/ui_PIDSettingScreen.c
+    screens/ui_UserSettingScreen.c
     ui_theme_manager.c
     ui_themes.c
     ui.c
@@ -11,10 +12,10 @@ SET(SOURCES screens/ui_PowerON.c
     ui_events.c
     images/ui_img_739362403.c
     images/ui_img_1671917170.c
-    images/ui_img_185202102.c
     images/ui_img_1699618864.c
-    images/ui_img_1708415670.c
+    images/ui_img_185202102.c
     images/ui_img_2103744591.c
+    images/ui_img_1708415670.c
     images/ui_img_740489818.c
     images/ui_img_1249241237.c
     images/ui_img_1357884022.c

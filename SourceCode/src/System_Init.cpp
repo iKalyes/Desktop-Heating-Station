@@ -40,6 +40,33 @@ void handle_init_failure(const char* error_msg) {
     }
 }
 
+// 新增: 屏幕类型选择回调与状态
+static volatile bool s_disp_type_selected = false;
+
+static void on_select_ips(lv_event_t* e) {
+    if (lv_event_get_code(e) != LV_EVENT_CLICKED) return;
+    lv_obj_t* modal = (lv_obj_t*)lv_event_get_user_data(e);
+    // 设置并保存选择
+    Display_Type = true;
+    Display_Type_Configured = true;
+    WriteDisplayType();
+    ChangeDisplayType(Display_Type);
+    if (modal) lv_obj_del(modal);
+    s_disp_type_selected = true;
+}
+
+static void on_select_tft(lv_event_t* e) {
+    if (lv_event_get_code(e) != LV_EVENT_CLICKED) return;
+    lv_obj_t* modal = (lv_obj_t*)lv_event_get_user_data(e);
+    // 设置并保存选择
+    Display_Type = false;
+    Display_Type_Configured = true;
+    WriteDisplayType();
+    ChangeDisplayType(Display_Type);
+    if (modal) lv_obj_del(modal);
+    s_disp_type_selected = true;
+}
+
 void System_Init()
 {
     char status_buffer[128];
@@ -50,10 +77,75 @@ void System_Init()
     Cooling_FAN_GPIO_Init();
     Buzzer_GPIO_Init();
     display_init();
+
+    // 新增: 如果未配置屏幕类型，则弹窗选择；已配置则直接应用
+    if (!Display_Type_Configured) {
+        lv_obj_t* modal = lv_obj_create(lv_scr_act());
+        // 缩小窗口尺寸
+        lv_obj_set_size(modal, 300, 160);
+        lv_obj_center(modal);
+        lv_obj_set_style_radius(modal, 8, LV_PART_MAIN);
+        lv_obj_set_style_pad_all(modal, 12, LV_PART_MAIN);
+        lv_obj_clear_flag(modal, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);
+        // 背景保持半透明深色，便于对比
+        lv_obj_set_style_bg_color(modal, lv_color_hex(0x202020), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(modal, LV_OPA_90, LV_PART_MAIN);
+
+        // 头部容器：放置图标与标题（横向排列，居中）
+        lv_obj_t* header = lv_obj_create(modal);
+        lv_obj_set_size(header, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+        lv_obj_set_style_bg_opa(header, LV_OPA_0, LV_PART_MAIN);
+        lv_obj_set_style_border_opa(header, LV_OPA_0, LV_PART_MAIN);
+        lv_obj_set_flex_flow(header, LV_FLEX_FLOW_ROW);
+        lv_obj_set_flex_align(header, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+        lv_obj_align(header, LV_ALIGN_TOP_MID, 0, 6);
+
+        // 图标（黄色）
+        lv_obj_t* icon = lv_img_create(header);
+        lv_img_set_src(icon, &ui_img_921610142);
+        lv_obj_set_style_img_recolor_opa(icon, LV_OPA_COVER, LV_PART_MAIN);
+        lv_obj_set_style_img_recolor(icon, lv_color_hex(0xFFFF00), LV_PART_MAIN);
+
+        // 标题（黄色）
+        lv_obj_t* label = lv_label_create(header);
+        lv_label_set_text(label, "请选择屏幕类型");
+        lv_obj_set_style_text_font(label, &ui_font_ASCII32, LV_PART_MAIN);
+        lv_obj_set_style_text_color(label, lv_color_hex(0xFFFF00), LV_PART_MAIN);
+
+        // IPS 按钮
+        lv_obj_t* btn_ips = lv_btn_create(modal);
+        lv_obj_set_size(btn_ips, 120, 48);
+        lv_obj_align(btn_ips, LV_ALIGN_BOTTOM_LEFT, 10, -10);
+        lv_obj_add_event_cb(btn_ips, on_select_ips, LV_EVENT_CLICKED, modal);
+        lv_obj_t* lbl_ips = lv_label_create(btn_ips);
+        lv_label_set_text(lbl_ips, "IPS屏幕");
+        lv_obj_set_style_text_font(lbl_ips, &ui_font_ASCII24, LV_PART_MAIN);
+        lv_obj_center(lbl_ips);
+
+        // TFT 按钮
+        lv_obj_t* btn_tft = lv_btn_create(modal);
+        lv_obj_set_size(btn_tft, 120, 48);
+        lv_obj_align(btn_tft, LV_ALIGN_BOTTOM_RIGHT, -10, -10);
+        lv_obj_add_event_cb(btn_tft, on_select_tft, LV_EVENT_CLICKED, modal);
+        lv_obj_t* lbl_tft = lv_label_create(btn_tft);
+        lv_label_set_text(lbl_tft, "TFT屏幕");
+        lv_obj_set_style_text_font(lbl_tft, &ui_font_ASCII24, LV_PART_MAIN);
+        lv_obj_center(lbl_tft);
+
+        // 等待用户选择，期间持续处理 LVGL 任务
+        s_disp_type_selected = false;
+        while (!s_disp_type_selected) {
+            lvgl_friendly_delay(20);
+        }
+    } else {
+        // 已配置则直接应用
+        ChangeDisplayType(Display_Type);
+    }
+
     if (ui_InitializeStatusBar) lv_bar_set_value(ui_InitializeStatusBar, 8, LV_ANIM_ON);
-    if (ui_InitializeStatus) lv_textarea_add_text(ui_InitializeStatus, "显示屏初始化成功. ");
+    if (ui_InitializeStatus) lv_textarea_add_text(ui_InitializeStatus, "显示屏初始化成功.\n");
     if (ui_InitializeStatusBar) lv_bar_set_value(ui_InitializeStatusBar, 16, LV_ANIM_ON);
-    if (ui_InitializeStatus) lv_textarea_add_text(ui_InitializeStatus, "GPIO 初始化成功.\n");
+    if (ui_InitializeStatus) lv_textarea_add_text(ui_InitializeStatus, "GPIO初始化成功.\n");
     if(Buzzer_Enabled == true)
     {
         Buzzer_ON();
@@ -115,7 +207,7 @@ void System_Init()
     // 5. lvgl_group_init
     lvgl_group_init();
     if (ui_InitializeStatusBar) lv_bar_set_value(ui_InitializeStatusBar, 72, LV_ANIM_ON);
-    if (ui_InitializeStatus) lv_textarea_add_text(ui_InitializeStatus, "Group初始化成功.\n");
+    if (ui_InitializeStatus) lv_textarea_add_text(ui_InitializeStatus, "控件组初始化成功.\n");
     lvgl_friendly_delay(INIT_STEP_DELAY_MS);
 
     // 6. Heater_PID_Compute_Init
@@ -128,7 +220,7 @@ void System_Init()
     if (ui_InitializeStatusBar)
         lv_bar_set_value(ui_InitializeStatusBar, 100, LV_ANIM_ON);
     if (ui_InitializeStatus) {
-        lv_textarea_add_text(ui_InitializeStatus, "初始化完成, 正在加载主屏幕.");
+        lv_textarea_add_text(ui_InitializeStatus, "初始化完成正在加载主屏幕.");
     }
     // 允许用户看到完成消息，然后再切换屏幕
     if(Buzzer_Enabled == true)

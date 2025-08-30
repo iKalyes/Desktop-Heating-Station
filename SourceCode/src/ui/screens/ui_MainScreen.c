@@ -79,13 +79,13 @@ void ui_MainScreen_screen_init(void)
     lv_obj_set_style_radius(ui_Buzzer, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(ui_Buzzer, lv_color_hex(0x393939), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Buzzer, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_src(ui_Buzzer, &ui_img_185202102, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_Buzzer, &ui_img_1699618864, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_Buzzer, lv_color_hex(0x6E6E6E), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui_Buzzer, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui_Buzzer, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_color(ui_Buzzer, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_opa(ui_Buzzer, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_src(ui_Buzzer, &ui_img_1699618864, LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_img_src(ui_Buzzer, &ui_img_185202102, LV_PART_MAIN | LV_STATE_CHECKED);
 
     ui_CoolingFan = lv_btn_create(ui_MainScreen);
     lv_obj_set_width(ui_CoolingFan, 102);
@@ -98,13 +98,13 @@ void ui_MainScreen_screen_init(void)
     lv_obj_set_style_radius(ui_CoolingFan, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(ui_CoolingFan, lv_color_hex(0x393939), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_CoolingFan, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_src(ui_CoolingFan, &ui_img_1708415670, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_CoolingFan, &ui_img_2103744591, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_color(ui_CoolingFan, lv_color_hex(0x6E6E6E), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(ui_CoolingFan, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui_CoolingFan, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_color(ui_CoolingFan, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_opa(ui_CoolingFan, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_src(ui_CoolingFan, &ui_img_2103744591, LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_img_src(ui_CoolingFan, &ui_img_1708415670, LV_PART_MAIN | LV_STATE_CHECKED);
 
     ui_TMP102Dock = lv_obj_create(ui_MainScreen);
     lv_obj_remove_style_all(ui_TMP102Dock);
@@ -394,11 +394,12 @@ void ui_MainScreen_screen_init(void)
     lv_obj_set_x(ui_HeaterChart, 173);
     lv_obj_set_y(ui_HeaterChart, 1);
     lv_chart_set_type(ui_HeaterChart, LV_CHART_TYPE_LINE);
+    lv_chart_set_point_count(ui_HeaterChart, 128);
     lv_chart_set_range(ui_HeaterChart, LV_CHART_AXIS_PRIMARY_Y, 0, 400);
     lv_chart_set_range(ui_HeaterChart, LV_CHART_AXIS_SECONDARY_Y, 0, 0);
     lv_chart_set_div_line_count(ui_HeaterChart, 10, 0);
-    lv_chart_set_axis_tick(ui_HeaterChart, LV_CHART_AXIS_PRIMARY_X, 0, 0, 512, 0, false, 50);
-    lv_chart_set_axis_tick(ui_HeaterChart, LV_CHART_AXIS_PRIMARY_Y, 1, 0, 10, 1, true, 0);
+    lv_chart_set_axis_tick(ui_HeaterChart, LV_CHART_AXIS_PRIMARY_X, 0, 0, 0, 0, false, 50);
+    lv_chart_set_axis_tick(ui_HeaterChart, LV_CHART_AXIS_PRIMARY_Y, 1, 0, 5, 1, true, 0);
     lv_chart_set_axis_tick(ui_HeaterChart, LV_CHART_AXIS_SECONDARY_Y, 0, 0, 0, 0, false, 0);
     lv_obj_set_style_radius(ui_HeaterChart, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(ui_HeaterChart, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
